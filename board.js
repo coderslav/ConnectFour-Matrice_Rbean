@@ -17,7 +17,7 @@ function putPiece(board, piece, column) {
         });
         if (columnArray.includes('-')) {
             let totalEmptySpaces = columnArray.filter(
-                (elem) => elem === '-'
+                elem => elem === '-'
             ).length;
             board[totalEmptySpaces - 1][column] = piece;
             return true;

@@ -1,5 +1,5 @@
 function gameLoop() {
-    var prompt = require('prompt-sync')({ sigint: true });
+    const prompt = require('prompt-sync')({ sigint: true });
     const { printBoard, putPiece, checkBoard } = require('./board');
 
     let board = [
