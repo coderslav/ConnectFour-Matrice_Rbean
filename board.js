@@ -30,14 +30,70 @@ function putPiece(board, piece, column) {
 }
 
 function checkBoard(board) {
+    function diagonalCheck(board, gamer) {
+        let firstCheckArray = [];
+        for (let z = 3; z < 7; z++) {
+            let counter = z;
+            let checkArray = [];
+            for (let i = 5; i > -1; i--) {
+                checkArray.push(board[i][counter]);
+                counter--;
+            }
+            let checkString = checkArray.join('');
+            firstCheckArray.push(checkString.includes(gamer));
+        }
+        let firstCheck = firstCheckArray.includes(true);
+
+        let secondCheckArray = [];
+        for (let z = 3; z < 7; z++) {
+            let counter = z;
+            let checkArray = [];
+            for (let i = 0; i < 6; i++) {
+                checkArray.push(board[i][counter]);
+                counter--;
+            }
+            let checkString = checkArray.join('');
+            secondCheckArray.push(checkString.includes(gamer));
+        }
+        let secondCheck = secondCheckArray.includes(true);
+
+        let thirdCheckArray = [];
+        for (let z = 3; z > -1; z--) {
+            let counter = z;
+            let checkArray = [];
+            for (let i = 5; i > -1; i--) {
+                checkArray.push(board[i][counter]);
+                counter++;
+            }
+            let checkString = checkArray.join('');
+            thirdCheckArray.push(checkString.includes(gamer));
+        }
+        let thirdCheck = thirdCheckArray.includes(true);
+
+        let fourthCheckArray = [];
+        for (let z = 3; z > -1; z--) {
+            let counter = z;
+            let checkArray = [];
+            for (let i = 0; i < 6; i++) {
+                checkArray.push(board[i][counter]);
+                counter++;
+            }
+            let checkString = checkArray.join('');
+            fourthCheckArray.push(checkString.includes(gamer));
+        }
+        let fourthCheck = fourthCheckArray.includes(true);
+
+        return firstCheck || secondCheck || thirdCheck || fourthCheck;
+    }
+
     let boardCopy = [...board];
 
     let hPrWt;
-    let dPrWt = [];
+    let dPrWt;
     let vPrWt;
 
     let hPyWt;
-    let dPyWt = [];
+    let dPyWt;
     let vPyWt;
 
     boardCopy.forEach((elem) => {
@@ -64,12 +120,15 @@ function checkBoard(board) {
         }
     }
 
+    dPrWt = diagonalCheck(boardCopy, 'RRRR');
+    dPyWt = diagonalCheck(boardCopy, 'YYYY');
+
     let drawTrigger = [];
     boardCopy.forEach((elem) => drawTrigger.push(elem.includes('-')));
 
-    if (hPyWt || vPyWt) {
+    if (hPyWt || vPyWt || dPyWt) {
         return 'Y';
-    } else if (hPrWt || vPrWt) {
+    } else if (hPrWt || vPrWt || dPrWt) {
         return 'R';
     } else if (drawTrigger.every((value) => !value)) {
         return 'DRAW';

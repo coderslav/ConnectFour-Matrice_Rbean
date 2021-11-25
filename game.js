@@ -10,6 +10,7 @@ function gameLoop() {
         ['-', '-', '-', '-', '-', '-', '-'],
         ['-', '-', '-', '-', '-', '-', '-'],
     ];
+    const errorMessage = 'Invalid move. Try again. In which column does it go?';
 
     let turn = 'Y';
 
@@ -39,9 +40,7 @@ function gameLoop() {
                 turn = 'R';
                 continue;
             } else {
-                console.log(
-                    "ERROR! You can't put a piece in this column. Choose another one!"
-                );
+                console.log(errorMessage);
                 continue;
             }
         }
@@ -52,9 +51,7 @@ function gameLoop() {
             turn = 'Y';
             continue;
         } else {
-            console.log(
-                "ERROR! You can't put a piece in this column. Choose another one!"
-            );
+            console.log(errorMessage);
             continue;
         }
     }
